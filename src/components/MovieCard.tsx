@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Play, Film } from "lucide-react";
 import { buildUrl, type Video } from "@/lib/server-url";
+import { fetchMovieData } from "@/lib/tmdb";
 
 interface Props {
   video: Video;
