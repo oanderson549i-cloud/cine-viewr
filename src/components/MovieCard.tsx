@@ -23,6 +23,7 @@ export function MovieCard({ video, onPlay }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [thumb, setThumb] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
+  const [poster, setPoster] = useState<string | null>(null);
   const src = buildUrl(video.url);
 
   useEffect(() => {
