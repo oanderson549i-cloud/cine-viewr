@@ -30,6 +30,11 @@ export function MovieCard({ video, onPlay }: Props) {
     const el = videoRef.current;
     if (!el) return;
     let cancelled = false;
+    fetchMovieData(video.name).then((data) => {
+  if (!cancelled && data?.poster) {
+    setPoster(data.poster);
+  }
+});
 
     const capture = () => {
       try {
