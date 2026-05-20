@@ -74,13 +74,25 @@ export function MovieCard({ video, onPlay }: Props) {
       onClick={() => onPlay(video)}
       className="group relative aspect-[2/3] overflow-hidden rounded-md bg-card text-left transition-all duration-300 hover:scale-105 hover:z-10 hover:shadow-2xl hover:shadow-black/60 focus:outline-none focus:ring-2 focus:ring-primary"
     >
-      {thumb ? (
-        <img src={thumb} alt={prettyName(video.name)} className="h-full w-full object-cover" loading="lazy" />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-card">
-          <Film className="h-12 w-12 text-muted-foreground" />
-        </div>
-      )}
+      {poster ? (
+  <img
+    src={poster}
+    alt={prettyName(video.name)}
+    className="h-full w-full object-cover"
+    loading="lazy"
+  />
+) : thumb ? (
+  <img
+    src={thumb}
+    alt={prettyName(video.name)}
+    className="h-full w-full object-cover"
+    loading="lazy"
+  />
+) : (
+  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-card">
+    <Film className="h-12 w-12 text-muted-foreground" />
+  </div>
+)}
 
       {!thumb && !failed && (
         <video
