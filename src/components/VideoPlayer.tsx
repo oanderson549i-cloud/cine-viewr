@@ -64,7 +64,6 @@ export function VideoPlayer({ video, onClose }: Props) {
         controls
         autoPlay
         playsInline
-        preload="auto"
         className="h-full w-full"
         onWaiting={() => setLoading(true)}
         onCanPlay={() => setLoading(false)}
