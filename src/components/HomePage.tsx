@@ -50,9 +50,12 @@ setServerUrl(base);
 
       const data = await response.json();
 
-      if (data.server) {
-        localStorage.setItem("cineroom_server_url", data.server);
-      }
+     if (data.server) {
+    const cleanServer = data.server.replace(/\/+$/, "");
+    localStorage.setItem("cineroom_server_url", cleanServer);
+    setServerUrl(cleanServer);
+}
+      
     } catch (error) {
       console.error("Erro ao carregar servidor:", error);
     }
