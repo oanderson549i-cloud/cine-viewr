@@ -39,8 +39,26 @@ export function HomePage() {
   }, []);
 
   useEffect(() => {
+  async function setupServer() {
+    try {
+      const response = await fetch(
+        "https://raw.githubusercontent.com/oanderson549i-cloud/https://github.com/oanderson549i-cloud/cine-viewr.git/public/server.json"
+      );
+
+      const data = await response.json();
+
+      if (data.server) {
+        localStorage.setItem("serverUrl", data.server);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar servidor:", error);
+    }
+
     load();
-  }, [load]);
+  }
+
+  setupServer();
+}, [load]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
