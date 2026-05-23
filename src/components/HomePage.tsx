@@ -18,10 +18,11 @@ export function HomePage() {
 
   const load = useCallback(async () => {
     const base = getServerUrl();
-    setServerUrl(base);
-    if (!base) {
-      setSettingsOpen(true);
-      return;
+setServerUrl(base);
+
+if (!base) {
+  return;
+}
     }
     setLoading(true);
     setError(null);
