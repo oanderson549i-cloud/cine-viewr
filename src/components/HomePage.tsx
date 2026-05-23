@@ -50,10 +50,11 @@ setServerUrl(base);
 
       const data = await response.json();
 
-     if (data.server) {
-    const cleanServer = data.server.replace(/\/+$/, "");
-    localStorage.setItem("cineroom_server_url", cleanServer);
-    setServerUrl(cleanServer);
+    if (data.server) {
+  const cleanServer = data.server.replace(/\/+$/, "");
+  localStorage.setItem("cineroom_server_url", cleanServer);
+  setServerUrl(cleanServer);
+  setSettingsOpen(false);
 }
       
     } catch (error) {
