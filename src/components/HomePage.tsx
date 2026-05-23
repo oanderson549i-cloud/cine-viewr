@@ -17,11 +17,13 @@ export function HomePage() {
   const [serverUrl, setServerUrl] = useState("");
 
   const load = useCallback(async () => {
-    const base = getServerUrl();
-    setServerUrl(base);
+   const base = getServerUrl();
+setServerUrl(base);
 
-    if (!base) {
-        return;
+  if (!base) {
+    setLoading(false);
+    return;
+}
 }
     }
     setLoading(true);
