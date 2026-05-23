@@ -44,9 +44,9 @@ setServerUrl(base);
   async function setupServer() {
     try {
 
-      const response = await fetch(
+    const response = await fetch(
   `https://raw.githubusercontent.com/oanderson549i-cloud/cine-viewr/main/public/server.json?t=${Date.now()}`
-  );
+);
 
       const data = await response.json();
 
