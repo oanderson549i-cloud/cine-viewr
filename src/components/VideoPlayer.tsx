@@ -74,7 +74,7 @@ export function VideoPlayer({ video, onClose }: Props) {
           setError("Verifique se a URL do servidor está correta e acessível.");
         }}
       />
-      <div className="absolute bottom-4 right-4 z-50">
+      <div className="absolute bottom-20 right-4 z-50">
   <button
     onClick={() => {
       if (navigator.share) {
