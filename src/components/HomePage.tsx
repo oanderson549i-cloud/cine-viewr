@@ -23,9 +23,8 @@ setServerUrl(base);
   if (!base) {
     setLoading(false);
     return;
-}
-}
     }
+    
     setLoading(true);
     setError(null);
     try {
@@ -45,7 +44,7 @@ setServerUrl(base);
   async function setupServer() {
     try {
       const response = await fetch(
-        "https://raw.githubusercontent.com/oanderson549i-cloud/https://github.com/oanderson549i-cloud/cine-viewr.git/public/server.json"
+        "https://raw.githubusercontent.com/oanderson549i-cloud/cine-viewr/main/server.json"
       );
 
       const data = await response.json();
