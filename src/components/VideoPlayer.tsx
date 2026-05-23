@@ -74,6 +74,24 @@ export function VideoPlayer({ video, onClose }: Props) {
           setError("Verifique se a URL do servidor está correta e acessível.");
         }}
       />
+      <div className="absolute bottom-4 right-4 z-50">
+  <button
+    onClick={() => {
+      if (navigator.share) {
+        navigator.share({
+          title: "Assistir na TV",
+          text: "Abrir filme no Web Video Caster",
+          url: src,
+        });
+      } else {
+        window.open(src, "_blank");
+      }
+    }}
+    className="rounded-lg bg-black/80 px-4 py-2 text-sm font-medium text-white backdrop-blur"
+  >
+    Assistir na TV
+  </button>
+</div>
     </div>
   );
 }
