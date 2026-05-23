@@ -48,7 +48,7 @@ export function HomePage() {
       const data = await response.json();
 
       if (data.server) {
-        localStorage.setItem("serverUrl", data.server);
+        localStorage.setItem("cineroom_server_url", data.server);
       }
     } catch (error) {
       console.error("Erro ao carregar servidor:", error);
