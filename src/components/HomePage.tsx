@@ -18,10 +18,10 @@ export function HomePage() {
 
   const load = useCallback(async () => {
     const base = getServerUrl();
-setServerUrl(base);
+    setServerUrl(base);
 
-if (!base) {
-  return;
+    if (!base) {
+        return;
 }
     }
     setLoading(true);
