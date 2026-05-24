@@ -62,7 +62,8 @@ setServerUrl(base);
       console.error("Erro ao carregar servidor:", error);
     }
 
-    load();
+    await load();
+setInitializing(false);
   }
 
   setupServer();
