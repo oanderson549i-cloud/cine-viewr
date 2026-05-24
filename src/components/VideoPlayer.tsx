@@ -3,6 +3,8 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { buildUrl, type Video } from "@/lib/server-url";
 
+const WATCH_PROGRESS_KEY = "cineroom_watch_progress";
+
 interface Props {
   video: Video;
   onClose: () => void;
@@ -23,10 +25,19 @@ export function VideoPlayer({ video, onClose }: Props) {
   }, [onClose]);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.play().catch(() => {});
-  }, []);
+  const el = ref.current;
+  if (!el) return;
+
+  const savedRaw = localStorage.getItem(WATCH_PROGRESS_KEY);
+  const saved = savedRaw ? JSON.parse(savedRaw) : {};
+  const current = saved[video.name];
+
+  if (current?.time && current.time > 10) {
+    el.currentTime = current.time;
+  }
+
+  el.play().catch(() => {});
+}, [video.name]);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-black">
@@ -66,6 +77,20 @@ export function VideoPlayer({ video, onClose }: Props) {
         playsInline
         preload="auto"
         className="h-full w-full"
+        onTimeUpdate={(e) => {
+  const el = e.currentTarget;
+
+  const savedRaw = localStorage.getItem(WATCH_PROGRESS_KEY);
+  const saved = savedRaw ? JSON.parse(savedRaw) : {};
+
+  saved[video.name] = {
+    time: el.currentTime,
+    duration: el.duration || 0,
+    updatedAt: Date.now(),
+  };
+
+  localStorage.setItem(WATCH_PROGRESS_KEY, JSON.stringify(saved));
+}}
         onWaiting={() => setLoading(true)}
         onCanPlay={() => setLoading(false)}
         onPlaying={() => setLoading(false)}
@@ -73,6 +98,7 @@ export function VideoPlayer({ video, onClose }: Props) {
           setLoading(false);
           setError("Verifique se a URL do servidor está correta e acessível.");
         }}
+
       />
       <div className="absolute bottom-20 right-4 z-50">
   <button
