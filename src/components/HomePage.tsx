@@ -52,10 +52,12 @@ export function HomePage() {
 
       const data = await response.json();
 
-    if (data.server) {
-  const cleanServer = data.server.replace(/\/+$/, "");
-  localStorage.setItem("cineroom_server_url", cleanServer);
-  setServerUrl(cleanServer);
+   let detectedServer = "";
+
+if (data.server) {
+  detectedServer = data.server.replace(/\/+$/, "");
+  localStorage.setItem("cineroom_server_url", detectedServer);
+  setServerUrl(detectedServer);
   setSettingsOpen(false);
 }
       
@@ -63,7 +65,7 @@ export function HomePage() {
       console.error("Erro ao carregar servidor:", error);
     }
 
-    await load();
+    await load(detectedServer);
 setInitializing(false);
   }
 
