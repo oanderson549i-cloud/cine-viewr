@@ -17,29 +17,30 @@ export function HomePage() {
   const [serverUrl, setServerUrl] = useState("");
   const [initializing, setInitializing] = useState(true);
 
-  const load = useCallback(async () => {
-   const base = getServerUrl();
-setServerUrl(base);
+  const load = useCallback(async (forcedServerUrl?: string) => {
+  const base = (forcedServerUrl || getServerUrl()).replace(/\/+$/, "");
+  setServerUrl(base);
 
   if (!base) {
     setLoading(false);
     return;
-    }
-    
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(buildUrl("/videos"));
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as Video[];
-      setVideos(Array.isArray(data) ? data : []);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Erro ao carregar vídeos");
-      setVideos([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  }
+
+  setLoading(true);
+  setError(null);
+
+  try {
+    const res = await fetch(`${base}/videos`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = (await res.json()) as Video[];
+    setVideos(Array.isArray(data) ? data : []);
+  } catch (e) {
+    setError(e instanceof Error ? e.message : "Erro ao carregar vídeos");
+    setVideos([]);
+  } finally {
+    setLoading(false);
+  }
+}, []);
 
   useEffect(() => {
   async function setupServer() {
