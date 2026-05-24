@@ -78,6 +78,26 @@ export function HomePage() {
 
   const featured = videos[0];
 
+  const continueWatching = useMemo(() => {
+  try {
+    const raw = localStorage.getItem("cineroom_watch_progress");
+    if (!raw) return [];
+
+    const progress = JSON.parse(raw);
+
+    return videos
+      .filter((v) => progress[v.name]?.time > 30)
+      .sort(
+        (a, b) =>
+          (progress[b.name]?.updatedAt || 0) -
+          (progress[a.name]?.updatedAt || 0)
+      )
+      .slice(0, 10);
+  } catch {
+    return [];
+  }
+}, [videos]);
+
   if (initializing) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background text-foreground">
@@ -158,6 +178,15 @@ export function HomePage() {
          
         </div>
 
+        {!loading && !error && continueWatching.length > 0 && !query && (
+  <section className="mb-10">
+    <h2 className="mb-4 text-xl font-bold md:text-2xl">
+      Continuar Assistindo
+    </h2>
+    <MovieGrid videos={continueWatching} onPlay={setPlaying} />
+  </section>
+)}
+  
         {loading && (
           <div className="flex items-center justify-center py-24">
             <Loader2 className="h-10 w-10 animate-spin text-primary" />
