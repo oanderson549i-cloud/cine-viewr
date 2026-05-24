@@ -44,29 +44,27 @@ export function HomePage() {
 
   useEffect(() => {
   async function setupServer() {
-    try {
+    let detectedServer = "";
 
-    const response = await fetch(
-  `https://raw.githubusercontent.com/oanderson549i-cloud/cine-viewr/main/public/server.json?t=${Date.now()}`
-);
+    try {
+      const response = await fetch(
+        `https://raw.githubusercontent.com/oanderson549i-cloud/cine-viewr/main/public/server.json?t=${Date.now()}`
+      );
 
       const data = await response.json();
 
-   let detectedServer = "";
-
-if (data.server) {
-  detectedServer = data.server.replace(/\/+$/, "");
-  localStorage.setItem("cineroom_server_url", detectedServer);
-  setServerUrl(detectedServer);
-  setSettingsOpen(false);
-}
-      
+      if (data.server) {
+        detectedServer = data.server.replace(/\/+$/, "");
+        localStorage.setItem("cineroom_server_url", detectedServer);
+        setServerUrl(detectedServer);
+        setSettingsOpen(false);
+      }
     } catch (error) {
       console.error("Erro ao carregar servidor:", error);
+    } finally {
+      await load(detectedServer);
+      setInitializing(false);
     }
-
-    await load(detectedServer);
-setInitializing(false);
   }
 
   setupServer();
