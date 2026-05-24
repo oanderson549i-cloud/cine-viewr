@@ -183,7 +183,11 @@ export function HomePage() {
     <h2 className="mb-4 text-xl font-bold md:text-2xl">
       Continuar Assistindo
     </h2>
-    <MovieGrid videos={continueWatching} onPlay={setPlaying} />
+    <MovieGrid
+  videos={continueWatching}
+  onPlay={setPlaying}
+  compact
+/>
   </section>
 )}
   
