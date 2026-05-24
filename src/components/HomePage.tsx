@@ -15,6 +15,7 @@ export function HomePage() {
   const [playing, setPlaying] = useState<Video | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [serverUrl, setServerUrl] = useState("");
+  const [initializing, setInitializing] = useState(true);
 
   const load = useCallback(async () => {
    const base = getServerUrl();
