@@ -77,6 +77,17 @@ setInitializing(false);
 
   const featured = videos[0];
 
+  if (initializing) {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background text-foreground">
+      <Loader2 className="mb-4 h-10 w-10 animate-spin text-primary" />
+      <p className="text-sm text-muted-foreground">
+        Conectando ao servidor CineViewr...
+      </p>
+    </div>
+  );
+}
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="fixed top-0 z-30 w-full bg-gradient-to-b from-background via-background/80 to-transparent">
