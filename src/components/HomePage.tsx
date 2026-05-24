@@ -155,11 +155,7 @@ export function HomePage() {
           <h2 className="text-xl font-bold md:text-2xl">
             {query ? `Resultados (${filtered.length})` : "Catálogo"}
           </h2>
-          {serverUrl && (
-            <span className="hidden truncate text-xs text-muted-foreground sm:block">
-              {serverUrl}
-            </span>
-          )}
+         
         </div>
 
         {loading && (
